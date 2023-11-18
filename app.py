@@ -10,8 +10,9 @@ def hello():
 def hey():
     if request.method == 'POST':
         firstname = request.form['firstname']
+        height = request.form['height']
         print(firstname)
-        return render_template('print.html',name=firstname)
+        return render_template('print.html',name=firstname,height=height)
 
     else:
 
