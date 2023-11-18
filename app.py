@@ -15,10 +15,9 @@ def hey():
         height = float(request.form['height'])
         print(firstname)
         
-        h = np.reshape(height,(-1,1))
-
         model = pickle.load(open('model.pkl','rb'))
-        weight = model.predict(h)
+        weight = model.predict([[height]])
+
         result = round(weight[0],2)
         print(result)
 
