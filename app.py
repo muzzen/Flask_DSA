@@ -1,5 +1,6 @@
 from flask import Flask, render_template,request
 import pickle
+import numpy as np
 
 app = Flask(__name__)
 
@@ -11,14 +12,17 @@ def hello():
 def hey():
     if request.method == 'POST':
         firstname = request.form['firstname']
-        height = request.form['height']
+        height = float(request.form['height'])
         print(firstname)
-        # model = pickle.load(open('model.pkl','rb'))
-        # weight = model.predict(height)
-        # w = np.reshape(weight,(-1,1))
-        # print(weight)
+        
+        h = np.reshape(height,(-1,1))
 
-        return render_template('print.html',name=firstname,height=height)
+        model = pickle.load(open('model.pkl','rb'))
+        weight = model.predict(h)
+        result = round(weight[0],2)
+        print(result)
+
+        return render_template('print.html',name=firstname,height=height,weight=result)
 
     else:
 
