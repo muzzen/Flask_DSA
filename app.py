@@ -8,7 +8,8 @@ def hello():
 
 @app.route('/name', methods=['POST'])
 def hey():
-    return ('Hi')
+    user_value = request.values['firstname']
+    return ("Hi {}".format(user_value))
 
 if __name__ == '__main__':
     app.run()
