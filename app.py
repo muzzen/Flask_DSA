@@ -1,4 +1,5 @@
 from flask import Flask, render_template,request
+import pickle
 
 app = Flask(__name__)
 
@@ -12,6 +13,10 @@ def hey():
         firstname = request.form['firstname']
         height = request.form['height']
         print(firstname)
+        model = pickle.open('model.pkl','rb')
+        weight = model.predict(height)
+        print(weight)
+
         return render_template('print.html',name=firstname,height=height)
 
     else:
